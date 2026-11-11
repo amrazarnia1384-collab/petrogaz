@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Petrogaz</title>
+<link href="https://fonts.googleapis.com/css2?family=Vazirmatn:wght@400;600;800&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#eef0fb;--card:#fff;--tx:#1b1a3a;--mut:#6b6f93;--pri:#6366f1;--ptx:#fff;--ink:#1e1b4b;--ok:#15803d;--bad:#d93025;--bd:#dcdff3;--inp:#f5f6fd;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+@media(prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#0c0b1d;--card:#17152e;--tx:#eeeefb;--mut:#9a9ac0;--ink:#08071a;--pri:#818cf8;--ptx:#0c0b1d;--ok:#4ade80;--bad:#f87171;--bd:#2a2750;--inp:#100f26}}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--tx);font-family:'Vazirmatn',Tahoma,sans-serif;line-height:1.7}
+button,input,select,textarea{font:inherit;color:inherit}
+.wrap{max-width:900px;margin:0 auto;padding:0 14px 40px}
+header{background:linear-gradient(135deg,var(--ink),#3730a3);color:#fff;padding:14px 0;border-bottom:5px solid var(--pri)}
+header .wrap{display:flex;align-items:center;gap:12px;padding-bottom:0}
+.lg{width:44px;height:44px;border-radius:10px;background:var(--pri);color:var(--ptx);display:grid;place-items:center;font-size:24px;flex:none}
+header h1{font-size:17px;margin:0;font-weight:800}header small{color:#b8bff0;font-size:12px}
+.sp{flex:1}
+nav{display:flex;gap:6px;overflow-x:auto;padding:12px 0}
+nav button{border:1px solid var(--bd);background:var(--card);padding:8px 16px;border-radius:999px;cursor:pointer;white-space:nowrap;font-weight:600}
+nav button.on{background:var(--ink);color:#fff;border-color:var(--ink)}
+.card{background:var(--card);border:1px solid var(--bd);border-radius:14px;padding:16px;margin-bottom:12px}
+h3{margin:4px 0 12px;font-size:16px}h3 small{color:var(--mut);font-weight:400}
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:10px;margin-bottom:16px}
+.st{background:var(--card);border:1px solid var(--bd);border-radius:14px;padding:14px;border-top:4px solid var(--pri)}
+.st b{display:block;font-size:20px;font-weight:800}.st span{color:var(--mut);font-size:13px}
+.form{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:10px}
+label.f{display:block;font-size:13px;color:var(--mut);font-weight:600}
+input,select,textarea{width:100%;background:var(--inp);border:1px solid var(--bd);border-radius:10px;padding:10px 12px;outline:none}
+input:focus,select:focus,textarea:focus{border-color:var(--pri);box-shadow:0 0 0 3px rgba(99,102,241,.3)}
+.btn{background:var(--pri);color:var(--ptx);border:0;border-radius:10px;padding:10px 18px;font-weight:800;cursor:pointer;display:inline-block;text-decoration:none}
+.btn.ghost{background:transparent;color:var(--tx);border:1px solid var(--bd);font-weight:600}
+.btn.sm{padding:5px 12px;font-size:13px}.btn.dg{background:transparent;color:var(--bad);border:1px solid var(--bad);font-weight:600}
+.row{display:flex;align-items:center;gap:10px;flex-wrap:wrap}
+.tag{display:inline-block;background:var(--inp);border:1px solid var(--bd);border-radius:8px;padding:1px 10px;font-size:13px}
+.plate{background:#fff;color:#111;border:2px solid #111;border-radius:6px;padding:0 10px;font-weight:800;font-size:13px}
+.mut{color:var(--mut);font-size:13px}.err{color:var(--bad);font-size:14px;min-height:20px;margin:6px 0 0}
+.badge{border-radius:999px;padding:2px 10px;font-size:12px;font-weight:700}
+.badge.g{background:rgba(21,128,61,.15);color:var(--ok)}.badge.r{background:rgba(217,48,37,.15);color:var(--bad)}
+.chips{display:grid;grid-template-columns:repeat(auto-fit,minmax(170px,1fr));gap:8px}
+.chip{position:relative;cursor:pointer}.chip input{position:absolute;opacity:0}
+.chip span{display:block;padding:9px 12px;border-radius:10px;border:1px solid var(--bad);color:var(--bad);font-size:14px}
+.chip span::before{content:"✗ "}
+.chip input:checked+span{border-color:var(--ok);color:var(--ok);background:rgba(21,128,61,.08)}
+.chip input:checked+span::before{content:"✓ "}
+.gauge{height:10px;border-radius:6px;background:var(--inp);border:1px solid var(--bd);overflow:hidden;margin:8px 0 4px}.gauge i{display:block;height:100%;background:var(--pri)}
+.login{max-width:380px;margin:9vh auto 0;text-align:center}.login .lg{margin:0 auto 10px;width:60px;height:60px;font-size:32px}
+.login h1{font-size:19px;margin:0 0 4px}.login input,.login .btn{margin-top:10px;width:100%}
+.empty{text-align:center;color:var(--mut);padding:26px 10px}
+.toast{position:fixed;bottom:calc(20px + env(safe-area-inset-bottom,0px));left:50%;transform:translateX(-50%);background:var(--ink);color:#fff;padding:10px 20px;border-radius:999px;font-size:14px;display:none;z-index:50}
+#ov{position:fixed;inset:0;overflow:auto;background:rgba(5,10,20,.7);display:none;padding:16px;z-index:40}#ov.show{display:block}
+.bar{display:flex;gap:8px;max-width:760px;margin:0 auto 10px}
+.sheet{background:#fff;color:#111;max-width:760px;margin:0 auto;padding:28px;border-radius:6px;font-size:14px}
+.sheet h2{margin:0;font-size:20px}.sheet h4{margin:18px 0 6px;border-right:5px solid #6366f1;padding-right:8px}
+.sheet table{width:100%;border-collapse:collapse}.sheet td,.sheet th{border:1px solid #cbd5e1;padding:6px 10px;text-align:right}.sheet th{background:#f1f5f9;width:18%}
+.sheet .g{color:#15803d;font-weight:700}.sheet .r{color:#d93025;font-weight:700}
+.sh-h{display:flex;justify-content:space-between;align-items:center;border-bottom:4px solid #6366f1;padding-bottom:10px;margin-bottom:14px}.sh-h b{font-size:34px}
+.sig{display:flex;justify-content:space-around;margin-top:46px}.sig span{border-top:1px solid #111;padding-top:4px;min-width:130px;text-align:center}
+@media print{body{background:#fff}#app,.toast{display:none!important}#ov{position:static!important;background:none!important;padding:0!important;overflow:visible!important;display:block!important}.bar{display:none!important}.sheet{max-width:none;padding:0}}
+</style>
+</head>
+<body>
+<div id="app"></div><div id="ov"></div><div class="toast" id="ts"></div>
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.45.4/dist/umd/supabase.min.js"></script>
+<script>
+const SB_URL='https://ksfkqpggjhbhtnglmttr.supabase.co';
+const SB_KEY='sb_publishable_BR6y-iqMuZaCewcLeqLlLQ_2yQ_R2v7';
+
+const sb=supabase.createClient(SB_URL,SB_KEY);
+const CH=[['engine','موتور و گیربکس'],['tires','لاستیک‌ها'],['brakes','ترمز'],['lights','چراغ‌ها و راهنما'],['tank','مخزن و شیلنگ‌ها'],['safety','تجهیزات ایمنی (کپسول)']];
+const $=s=>document.querySelector(s),fa=n=>Number(n||0).toLocaleString('fa-IR'),dt=t=>new Intl.DateTimeFormat('fa-IR',{dateStyle:'medium',timeStyle:'short'}).format(new Date(t));
+const dg=s=>String(s).replace(/[۰-۹]/g,d=>'۰۱۲۳۴۵۶۷۸۹'.indexOf(d)).replace(/[٠-٩]/g,d=>'٠١٢٣٤٥٦٧٨٩'.indexOf(d));
+const esc=s=>String(s??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+const toast=m=>{const t=$('#ts');t.textContent=m;t.style.display='block';setTimeout(()=>t.style.display='none',2800)};
+const normPh=s=>{let p=dg(s).replace(/\D/g,'');if(!p)return '';if(p.startsWith('00'))p=p.slice(2);else if(/^09\d{9}$/.test(p))p='98'+p.slice(1);else if(/^9\d{9}$/.test(p))p='98'+p;return p.length>=10&&p.length<=15?p:''};
+const disp=p=>p.startsWith('98')?'0'+p.slice(2):'+'+p;
+let me=null,D=[],R=[],P=[],L=[],tab='dash',flt='',selD='',msgD=null;
+const isM=()=>me&&me.role==='manager',pn=id=>(P.find(p=>p.id===id)||{}).name||'—';
+const logA=t=>sb.from('audit_log').insert({action:t}).then(()=>{});
+
+async function load(){
+  const q=[sb.from('drivers').select('*').order('created_at',{ascending:false}),sb.from('reports').select('*').order('created_at',{ascending:false}).limit(500),sb.from('profiles').select('*')];
+  if(isM())q.push(sb.from('audit_log').select('*').order('created_at',{ascending:false}).limit(100));
+  const r=await Promise.all(q),er=r.find(x=>x.error);if(er)return toast('خطا در دریافت اطلاعات: '+er.error.message);
+  D=r[0].data;R=r[1].data;P=r[2].data;L=r[3]?r[3].data:[]}
+async function enter(u){
+  const{data,error}=await sb.from('profiles').select('*').eq('id',u.id).single();
+  if(error||!data){await sb.auth.signOut();me=null;render();return toast('این کاربر هنوز نقشی ندارد؛ در جدول profiles ثبتش کنید')}
+  me=data;await load();tab=isM()?'dash':'new';render()}
+async function login(){const e=$('#le'),em=$('#lu').value.trim(),pw=$('#lc').value;if(!em||!pw)return e.textContent='ایمیل و رمز را وارد کنید';
+  e.textContent='در حال ورود…';const{data,error}=await sb.auth.signInWithPassword({email:em,password:pw});
+  if(error)return e.textContent='ایمیل یا رمز نادرست است';await enter(data.user);logA('ورود')}
+async function logout(){await sb.auth.signOut();me=null;D=R=P=L=[];render()}
+async function boot(){if(SB_KEY.startsWith('PASTE'))return $('#app').innerHTML='<div class="wrap"><div class="card login"><h1>⚠️ کلید Supabase وارد نشده</h1><p class="mut">در ابتدای اسکریپت فایل، مقدار SB_KEY را با کلید Publishable پروژه جایگزین کنید.</p></div></div>';
+  const{data}=await sb.auth.getSession();if(data.session)await enter(data.session.user);else render()}
+
+function render(){const a=$('#app');
+  if(!me){a.innerHTML=`<div class="wrap"><div class="card login"><div class="lg">⛽</div><h1>Petrogaz</h1><p class="mut">سامانه نظارت بر سوخت‌رسان‌ها</p><input id="lu" type="email" dir="ltr" placeholder="ایمیل"><input id="lc" type="password" dir="ltr" placeholder="رمز عبور" onkeydown="if(event.key==='Enter')login()"><button class="btn" onclick="login()">ورود</button><p class="err" id="le"></p></div></div>`;return}
+  const m=isM(),tabs=m?[['dash','داشبورد'],['drv','رانندگان و خودروها'],['ins','بازرس‌ها'],['arc','بایگانی گزارش‌ها'],['log','گزارش فعالیت']]:[['new','ثبت گزارش جدید'],['drv','رانندگان'],['arc','گزارش‌های من']];
+  if(!tabs.some(t=>t[0]===tab))tab=tabs[0][0];
+  a.innerHTML=`<header><div class="wrap"><div class="lg">⛽</div><div><h1>Petrogaz</h1><small>پنل ${m?'مدیریت':'بازرس'} — ${esc(me.name)}</small></div><div class="sp"></div><button class="btn ghost sm" style="color:#fff;border-color:#6b72c9" onclick="refresh()">↻</button><button class="btn ghost sm" style="color:#fff;border-color:#6b72c9" onclick="logout()">خروج</button></div></header><div class="wrap"><nav>${tabs.map(t=>`<button class="${tab===t[0]?'on':''}" onclick="tab='${t[0]}';render()">${t[1]}</button>`).join('')}</nav>${{dash:dashV,drv:drvV,ins:insV,arc:arcV,new:newV,log:logV}[tab]()}</div>`}
+async function refresh(){await load();render();toast('به‌روز شد')}
+
+const stat=(i,l,v)=>`<div class="st"><span>${i} ${l}</span><b>${v}</b></div>`;
+const sold=r=>Number(r.fuel_morning)-Number(r.fuel_evening),probs=r=>CH.filter(c=>!r.checks[c[0]]).length;
+function dashV(){const inc=R.reduce((s,r)=>s+Number(r.income),0),so=R.reduce((s,r)=>s+sold(r),0);
+  return `<div class="grid">${stat('🚚','رانندگان',fa(D.length)+' از ۲۰')}${stat('🕵️','بازرس‌ها',fa(P.filter(p=>p.role==='inspector').length)+' از ۵')}${stat('📋','گزارش‌ها',fa(R.length))}${stat('⛽','سوخت فروخته‌شده',fa(so)+' لیتر')}${stat('💰','کل درآمد',fa(inc)+' تومان')}</div>
+  <div class="card row"><span>🟢 متصل به پایگاه داده</span><span class="sp"></span><button class="btn ghost sm" onclick="exp()">خروجی CSV</button></div>
+  <h3>آخرین گزارش‌ها</h3>${list(R.slice(0,5),true)}
+  <div class="card"><h3>تغییر رمز</h3><div class="form"><input id="np" type="password" dir="ltr" placeholder="رمز جدید (حداقل ۸ کاراکتر)"><button class="btn" onclick="chpw()">ذخیره رمز</button></div><p class="err" id="pe"></p></div>`}
+async function chpw(){const n=$('#np').value;if(n.length<8)return $('#pe').textContent='رمز باید حداقل ۸ کاراکتر باشد';const{error}=await sb.auth.updateUser({password:n});$('#pe').textContent=error?error.message:'';if(!error){$('#np').value='';logA('تغییر رمز');toast('رمز تغییر کرد')}}
+function exp(){const q=v=>'"'+String(v).replace(/"/g,'""')+'"',rows=['تاریخ,راننده,کد,پلاک,بازرس,سوخت صبح,سوخت بعد از کار,فروش,درآمد'].concat(R.map(r=>[dt(r.created_at),r.driver_name,r.driver_code,r.plate,pn(r.inspector_id),r.fuel_morning,r.fuel_evening,sold(r),r.income].map(q).join(','))).join('\n');
+  const a=document.createElement('a');a.href=URL.createObjectURL(new Blob(['\ufeff'+rows],{type:'text/csv'}));a.download='petrogaz-reports.csv';a.click()}
+
+function list(rs,m){if(!rs.length)return '<div class="card empty">هنوز گزارشی ثبت نشده است</div>';
+  return rs.map(r=>{const s=sold(r),pc=r.fuel_morning>0?Math.round(s/r.fuel_morning*100):0,p=probs(r);
+  return `<div class="card"><div class="row"><b>${esc(r.driver_name)}</b><span class="tag">کد ${esc(r.driver_code)}</span><span class="plate">${esc(r.plate)}</span><span class="sp"></span><span class="badge ${p?'r':'g'}">${p?fa(p)+' مورد فنی نیازمند بررسی':'وضعیت فنی سالم'}</span></div><div class="gauge"><i style="width:${pc}%"></i></div>
+  <div class="mut">صبح ${fa(r.fuel_morning)} ل — بعد از کار ${fa(r.fuel_evening)} ل — فروش ${fa(s)} ل — درآمد ${fa(r.income)} تومان</div>
+  <div class="row" style="margin-top:8px"><span class="mut">${dt(r.created_at)} · بازرس: ${esc(pn(r.inspector_id))}</span><span class="sp"></span><button class="btn sm" onclick="show('${r.id}')">مشاهده / PDF</button>${m?`<button class="btn dg sm" onclick="del('reports','${r.id}',this)">حذف</button>`:''}</div></div>`}).join('')}
+async function del(t,id,b){if(!b.dataset.s){b.dataset.s=1;b.textContent='تأیید حذف؟';setTimeout(()=>{b.dataset.s='';b.textContent='حذف'},3000);return}
+  const{error}=await sb.from(t).delete().eq('id',id);if(error)return toast(error.message);logA('حذف از '+t);await load();render()}
+
+function drvV(){const n=D.length,m=isM();
+  return `<div class="card"><h3>ثبت راننده و خودرو <small>(${fa(n)} از ۲۰)</small></h3>${n>=20?'<p class="err">ظرفیت ۲۰ راننده تکمیل است.</p>':`<div class="form"><input id="dn" placeholder="نام راننده"><input id="dc" placeholder="کد راننده"><input id="dp" placeholder="پلاک کامیون"><input id="dh" inputmode="tel" placeholder="شماره موبایل (مثلاً ۰۹۱۲۱۲۳۴۵۶۷)" onkeydown="if(event.key==='Enter')addD()"><button class="btn" onclick="addD()">ثبت راننده</button></div><p class="err" id="de"></p>`}</div>
+  ${n?D.map(d=>`<div class="card row"><b>${esc(d.name)}</b><span class="tag">کد ${esc(d.code)}</span><span class="plate">${esc(d.plate)}</span>${d.phone?`<span class="tag" dir="ltr">${esc(disp(d.phone))}</span>`:''}<span class="sp"></span><button class="btn sm" onclick="openMsg('${d.id}')">💬 پیام</button>${m?`<button class="btn dg sm" onclick="del('drivers','${d.id}',this)">حذف</button>`:`<button class="btn ghost sm" onclick="selD='${d.id}';tab='new';render()">ثبت گزارش</button>`}</div>`).join(''):'<div class="card empty">راننده‌ای ثبت نشده است</div>'}`}
+async function addD(){const name=$('#dn').value.trim(),code=dg($('#dc').value.trim()),plate=dg($('#dp').value.trim()),raw=$('#dh').value.trim(),ph=normPh(raw),e=$('#de');
+  if(!name||!code||!plate)return e.textContent='نام، کد و پلاک را کامل وارد کنید';if(raw&&!ph)return e.textContent='شماره تلفن معتبر نیست';
+  const{data,error}=await sb.from('drivers').insert({name,code,plate,phone:ph||null}).select().single();
+  if(error)return e.textContent=/duplicate|unique/i.test(error.message)?'این کد یا پلاک قبلاً ثبت شده است':/max 20/.test(error.message)?'حداکثر ۲۰ راننده مجاز است':error.message;
+  logA('ثبت راننده '+name);await load();if(!isM()){selD=data.id;tab='new'}render();toast('راننده ثبت شد')}
+
+function insV(){const ins=P.filter(p=>p.role==='inspector');
+  return `<div class="card"><h3>بازرس‌ها <small>(${fa(ins.length)} از ۵)</small></h3><p class="mut">برای افزودن بازرس جدید: در Supabase به Authentication ← Users بروید، کاربر را با ایمیل و رمز بسازید (Auto Confirm). کاربرهای بعد از مدیر خودکار بازرس می‌شوند.</p></div>
+  ${ins.length?ins.map(i=>`<div class="card row"><b>${esc(i.name)}</b><span class="tag" dir="ltr">${esc(i.id.slice(0,8))}…</span></div>`).join(''):'<div class="card empty">بازرسی ثبت نشده است</div>'}`}
+function logV(){return L.length?L.map(l=>`<div class="card row"><span class="tag">${esc(pn(l.actor))}</span><span>${esc(l.action)}</span><span class="sp"></span><span class="mut">${dt(l.created_at)}</span></div>`).join(''):'<div class="card empty">فعالیتی ثبت نشده است</div>'}
+function arcV(){const rs=flt?R.filter(r=>r.driver_id===flt):R;
+  return `<div class="card row"><label class="f">فیلتر بر اساس راننده</label><select style="max-width:260px" onchange="flt=this.value;render()"><option value="">همه</option>${D.map(d=>`<option value="${d.id}" ${flt===d.id?'selected':''}>${esc(d.name)} — ${esc(d.plate)}</option>`).join('')}</select></div>${list(rs,isM())}`}
+
+function newV(){if(!D.length)return '<div class="card empty">هنوز راننده‌ای ثبت نشده است.<br><br><button class="btn" onclick="tab=&quot;drv&quot;;render()">+ ثبت اولین راننده</button></div>';
+  return `<div class="card"><h3>گزارش بازرسی جدید</h3><label class="f">راننده و خودرو</label><select id="fd">${D.map(d=>`<option value="${d.id}" ${selD===d.id?'selected':''}>${esc(d.name)} — کد ${esc(d.code)} — پلاک ${esc(d.plate)}</option>`).join('')}</select>
+  <h3 style="margin-top:18px">وضعیت فنی <small>(تیک = سالم)</small></h3><div class="chips">${CH.map(c=>`<label class="chip"><input type="checkbox" id="c_${c[0]}" checked><span>${c[1]}</span></label>`).join('')}</div>
+  <h3 style="margin-top:18px">ظاهر خودرو</h3><select id="fa"><option>عالی</option><option>خوب</option><option>متوسط</option><option>ضعیف (نیازمند نظافت یا رنگ)</option></select>
+  <h3 style="margin-top:18px">سوخت و درآمد</h3><div class="form"><div><label class="f">سوخت اول صبح (لیتر)</label><input id="fm" inputmode="decimal" oninput="live()"></div><div><label class="f">سوخت بعد از کار (لیتر)</label><input id="fe" inputmode="decimal" oninput="live()"></div><div><label class="f">درآمد روز (تومان)</label><input id="fi" inputmode="numeric" oninput="fmt(this)"></div></div>
+  <div style="margin-top:12px"><label class="f">توضیحات</label><textarea id="fn" rows="3"></textarea></div><p id="lv" class="mut" style="min-height:24px;margin:10px 0 0"></p><p class="err" id="fe2"></p><button class="btn" onclick="addR()">ثبت و ذخیره گزارش</button></div>`}
+function fmt(el){const v=dg(el.value).replace(/\D/g,'');el.value=v?Number(v).toLocaleString('fa-IR'):'';live()}
+function live(){const g=i=>parseFloat(dg($(i).value).replace(/[,٬]/g,'')),mo=g('#fm'),ev=g('#fe'),inc=g('#fi'),o=$('#lv');if(!o)return;if(isNaN(mo)||isNaN(ev)){o.innerHTML='';return}const s=mo-ev;o.innerHTML=s<0?'<span style="color:var(--bad)">سوخت بعد از کار بیشتر از سوخت صبح است</span>':`فروش: <b>${fa(s)}</b> لیتر${!isNaN(inc)&&s>0?` — درآمد هر لیتر: <b>${fa(Math.round(inc/s))}</b> تومان`:''}`}
+async function addR(){const d=D.find(x=>x.id===$('#fd').value),e=$('#fe2'),g=i=>$(i).value.trim();
+  if(!g('#fm')||!g('#fe')||!g('#fi'))return e.textContent='مقدار سوخت صبح، سوخت بعد از کار و درآمد را وارد کنید';
+  const n=i=>+dg(g(i)).replace(/[,٬]/g,''),mo=n('#fm'),ev=n('#fe'),inc=n('#fi');
+  if([mo,ev,inc].some(x=>isNaN(x)||x<0))return e.textContent='فقط عدد معتبر وارد کنید';if(ev>mo)return e.textContent='سوخت بعد از کار نمی‌تواند بیشتر از سوخت صبح باشد';
+  const checks={};CH.forEach(c=>checks[c[0]]=$('#c_'+c[0]).checked);
+  const{error}=await sb.from('reports').insert({driver_id:d.id,driver_name:d.name,driver_code:d.code,plate:d.plate,checks,appearance:$('#fa').value,note:g('#fn'),fuel_morning:mo,fuel_evening:ev,income:inc});
+  if(error)return e.textContent=error.message;logA('ثبت گزارش برای '+d.name);await load();tab='arc';render();toast('گزارش ذخیره شد')}
+
+function show(id){const r=R.find(x=>x.id===id);if(!r)return;const s=sold(r),pl=s>0?Math.round(r.income/s):0;
+  $('#ov').innerHTML=`<div class="bar"><button class="btn" onclick="window.print()">🖨️ چاپ / ذخیره PDF</button><button class="btn ghost" style="background:#fff" onclick="cl()">بستن</button></div>
+  <div class="sheet"><div class="sh-h"><div><h2>Petrogaz — گزارش بازرسی کامیون سوخت‌رسان</h2><span>${dt(r.created_at)}</span></div><b>⛽</b></div>
+  <table><tr><th>راننده</th><td>${esc(r.driver_name)}</td><th>کد راننده</th><td>${esc(r.driver_code)}</td></tr><tr><th>پلاک</th><td>${esc(r.plate)}</td><th>بازرس</th><td>${esc(pn(r.inspector_id))}</td></tr></table>
+  <h4>وضعیت فنی</h4><table>${CH.map(c=>`<tr><td>${c[1]}</td><td class="${r.checks[c[0]]?'g':'r'}">${r.checks[c[0]]?'✓ سالم':'✗ نیازمند بررسی'}</td></tr>`).join('')}</table>
+  <h4>ظاهر خودرو</h4><p>${esc(r.appearance)}</p>
+  <h4>سوخت و درآمد</h4><table><tr><th>سوخت اول صبح</th><td>${fa(r.fuel_morning)} لیتر</td><th>سوخت بعد از کار</th><td>${fa(r.fuel_evening)} لیتر</td></tr><tr><th>سوخت فروخته‌شده</th><td>${fa(s)} لیتر</td><th>درآمد روز</th><td>${fa(r.income)} تومان</td></tr><tr><th>درآمد هر لیتر</th><td colspan="3">${fa(pl)} تومان</td></tr></table>
+  <h4>توضیحات</h4><p>${esc(r.note)||'—'}</p><div class="sig"><span>امضای بازرس</span><span>امضای راننده</span><span>امضای مدیر</span></div></div>`;$('#ov').classList.add('show')}
+const cl=()=>{$('#ov').classList.remove('show');$('#ov').innerHTML=''};
+
+function openMsg(id){const d=D.find(x=>x.id===id);if(!d)return;msgD=id;
+  $('#ov').innerHTML=`<div class="card" style="max-width:520px;margin:0 auto"><h3>💬 پیام به ${esc(d.name)} <small>— پلاک ${esc(d.plate)}</small></h3>
+  <label class="f">شماره موبایل</label><div class="row"><input id="mp" dir="ltr" inputmode="tel" value="${esc(d.phone?disp(d.phone):'')}" placeholder="09121234567" style="flex:1"><button class="btn ghost sm" onclick="savePh()">ذخیره شماره</button></div>
+  <div class="row" style="margin:12px 0"><button class="btn ghost sm" onclick="tpl('loc')">📍 موقعیت جایگاه</button><button class="btn ghost sm" onclick="tpl('inf')">📢 اطلاع‌رسانی</button></div>
+  <div id="lf" class="form" style="margin-bottom:10px"><input id="ms" placeholder="نام یا آدرس جایگاه" oninput="tpl('loc',1)"><input id="ml" dir="ltr" placeholder="لینک موقعیت روی نقشه (اختیاری)" oninput="tpl('loc',1)"></div>
+  <label class="f">متن پیام (قابل ویرایش)</label><textarea id="mt" rows="5"></textarea>
+  <div class="row" style="margin-top:12px"><a class="btn" href="#" onclick="return mkLink(this,'sms')">✉️ پیامک</a><a class="btn" href="#" target="_blank" rel="noopener" onclick="return mkLink(this,'wa')">💬 واتس‌اپ</a><button class="btn ghost" onclick="cpn()">کپی شماره</button><button class="btn ghost" onclick="cpy()">کپی متن</button><button class="btn ghost" onclick="cl()">بستن</button></div><p class="err" id="me"></p></div>`;
+  $('#ov').classList.add('show');tpl('loc')}
+function tpl(k,live){const d=D.find(x=>x.id===msgD);if(!d)return;$('#lf').style.display=k==='loc'?'grid':'none';
+  if(k==='loc'){const s=$('#ms').value.trim(),l=$('#ml').value.trim();$('#mt').value='سلام '+d.name+'\n📍 جایگاه شما: '+(s||'—')+(l?'\nموقعیت روی نقشه: '+l:'')+'\nلطفاً پس از رسیدن اطلاع بدهید.\n— Petrogaz'}
+  else if(!live)$('#mt').value='سلام '+d.name+'\n📢 اطلاعیه:\n\n— Petrogaz'}
+function mkLink(a,kind){const d=D.find(x=>x.id===msgD),e=$('#me'),ph=normPh($('#mp').value)||(d&&d.phone),t=$('#mt').value.trim();
+  if(!ph){e.textContent='ابتدا شماره‌ی راننده را وارد کنید';return false}if(!t){e.textContent='متن پیام خالی است';return false}e.textContent='';
+  a.href=kind==='sms'?'sms:+'+ph+(/iPhone|iPad|iPod/.test(navigator.userAgent)?'&':'?')+'body='+encodeURIComponent(t):'https://wa.me/'+ph+'?text='+encodeURIComponent(t);
+  logA((kind==='sms'?'پیامک':'واتس‌اپ')+' به '+d.name);return true}
+async function savePh(){const p=normPh($('#mp').value),e=$('#me');if(!p)return e.textContent='شماره معتبر نیست';
+  const{error}=await sb.from('drivers').update({phone:p}).eq('id',msgD);if(error)return e.textContent=error.message;e.textContent='';await load();toast('شماره ذخیره شد')}
+function cpn(){const p=normPh($('#mp').value);if(!p)return toast('شماره وارد نشده');navigator.clipboard.writeText(disp(p)).then(()=>toast('شماره کپی شد'),()=>toast('شماره را دستی کپی کنید'))}
+function cpy(){const t=$('#mt');navigator.clipboard.writeText(t.value).then(()=>toast('متن کپی شد'),()=>{t.select();document.execCommand('copy');toast('متن کپی شد')})}
+
+boot();
+</script>
+</body>
+  </html>
